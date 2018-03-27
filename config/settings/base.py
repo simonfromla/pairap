@@ -3,6 +3,7 @@ Base settings to build other settings files upon.
 """
 
 import environ
+import os
 
 ROOT_DIR = environ.Path(__file__) - 3  # (pairup/config/settings/base.py - 3 = pairup/)
 APPS_DIR = ROOT_DIR.path('pairup')
@@ -38,8 +39,12 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgis:///pairgis'),
+    'default': env.db('DATABASE_URL'),
 }
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+DATABASES['default']['NAME'] = 'loregis'
+# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
@@ -78,6 +83,10 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'pairup.users.apps.UsersConfig',
+    'landing',
+    'user_profile',
+    'chat',
+    'notifications',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -100,7 +109,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_REDIRECT_URL = 'landing:home'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = 'account_login'
 

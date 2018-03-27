@@ -1,0 +1,40 @@
+.dropdown-menu-scroll {
+    height: auto;
+    max-height: 400px;
+    overflow-x: hidden;
+}
+
+@media(max-width: 767.98px){
+
+}
+
+html {
+    /*declare rem*/
+    font-size: 18px;
+}
+
+body {
+    /*declare em*/
+    font-size: 18px;
+}
+
+.footer {
+    height: 15em;
+}
+
+#post-link {
+    text-decoration: none;
+}
+
+
+#messages {
+    height: 200px;
+    overflow: scroll;
+    /*display: flex;
+    flex-direction: column;
+    justify-content: flex-end;*/
+}
+
+#chats {
+    position: fixed;
+}

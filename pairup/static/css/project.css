@@ -1,5 +1,15 @@
 /* These styles are generated from project.scss. */
 
+:root {
+  --primaryColor: #ececec;
+}
+:root {
+  --secondaryColor: #666;
+}
+:root {
+  --shadowColor: rgba(0, 0, 0, .6);
+}
+
 .alert-debug {
   color: black;
   background-color: white;
@@ -10,4 +20,260 @@
   color: #b94a48;
   background-color: #f2dede;
   border-color: #eed3d7;
+}
+
+/* Display django-debug-toolbar.
+   See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+   and https://github.com/pydanny/cookiecutter-django/issues/317
+*/
+[hidden][style="display: block;"] {
+  display: block !important;
+}
+
+
+.list-listing-date {}
+.list-listing-by {}
+.list-lead-box {
+}
+.list-to-learn-lead {
+  font-size: .8em;
+  color: var(--secondaryColor);
+  margin-right: 10px;
+}
+.list-to-teach-lead {
+  font-size: .8em;
+  color: var(--secondaryColor);
+  margin-right: 15px;
+}
+.list-muted-text {
+  font-size: .8em;
+  color: var(--secondaryColor);
+}
+
+/*.sort_search ul {
+    list-style-type: none;
+}
+.sort_search li {
+    display: inline;
+    border: solid black 1px;
+    padding: 2px;
+}*/
+
+.credential-photos img {
+    display: inline;
+}
+
+.nav-pills {
+    /*font-size: 1.2em;*/
+}
+
+/*Remove bullet from all uls. (Mainly for ChoiceField)*/
+ul
+{
+    list-style-type: none;
+}
+
+div.form-error {
+    margin: 5px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(255,125,125,1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(255,125,125,1);
+    box-shadow: 0px 0px 5px 0px rgba(255,125,125,1);
+}
+
+/*Pair request pending button*/
+.btn-no-hover {
+  pointer-events: none;
+}
+
+body {
+  background-color: #f2f3f4;
+  /*font-family: 'Raleway', sans-serif;*/
+  /*font-family: 'Open Sans', sans-serif;*/
+}
+/*
+.fontawesome-i2svg-active body {
+  display: initial;
+}
+*/
+.live_notify_list {
+  overflow: auto;
+  height: 400px;
+  width: 400px;
+}
+
+.read_message {
+  background-color: pink;
+}
+
+.profile_photo_thumbnail {
+  border-radius: 50%;
+}
+
+.profile_photo {
+  border: 4px solid #fff;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+}
+.navbar-brand:hover {
+  transform: rotate(360deg);
+  -ms-transform: rotate(360deg); /* IE 9 */
+  -moz-transform: rotate(360deg); /* Firefox */
+  -webkit-transform: rotate(360deg); /* Safari and Chrome */
+  -o-transform: rotate(360deg); /* Opera */
+}
+
+.footer {
+  height: 300px;
+  background-color: honeydew;
+  font-family: 'Raleway', sans-serif;
+}
+.footer-links {
+  font-weight: bolder;
+  font-size: .7em;
+  font-family: 'Raleway', sans-serif;
+}
+
+
+
+.loading {
+  display: none;
+}
+
+ .typed-cursor {
+        opacity: 1;
+        animation: blink .7s infinite;
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+/*.typed-cursor {
+        opacity: 1;
+        animation: typedjsBlink 0.7s infinite;
+        animation: typedjsBlink 0.7s infinite;
+        animation-name: typedjsBlink;
+        animation-duration: 0.7s;
+        animation-timing-function: initial;
+        animation-delay: initial;
+        animation-iteration-count: infinite;
+        animation-direction: initial;
+        animation-fill-mode: initial;
+        animation-play-state: initial;
+    }
+
+     @keyframes typedjsBlink{
+        50% { opacity: 0.0; }
+    }
+
+    @-webkit-keyframes typedjsBlink{
+        0% { opacity: 1; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1; }
+    }*/
+
+.typed-fade-out{
+  opacity: 0;
+  transition: opacity .25s;
+  -webkit-animation: 0;
+  animation: 0;
+}
+
+.form-control {
+  border: none;
+}
+.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: box-shadow: 2px 2px var(--shadowColor);
+}
+#search-input {
+  margin-bottom: 20px;
+}
+
+
+input[type="text"] {
+     border-top: 0;
+     border-right: 0;
+     border-left: 0;
+     -webkit-box-shadow: none;
+     /*box-shadow: none;*/
+     box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+}
+
+input[type="text"]:hover {
+     -webkit-box-shadow: none;
+     box-shadow: 0 4px 3px rgba(0,0,0,0.3);
+}
+
+input[type="text"]:focus {
+     -webkit-box-shadow: none;
+     box-shadow: 0 4px 3px rgba(0,0,0,0.3);
+}
+
+#search-button {
+  background-color: white;
+  border: none;
+  color: black;
+  border-radius: 0;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+}
+#search-button:hover {
+     -webkit-box-shadow: none;
+     box-shadow: 0 3px 3px rgba(0,0,0,0.3);
+
+
+}
+#search-button:focus {
+     -webkit-box-shadow: none;
+     box-shadow: 0 3px 3px rgba(0,0,0,0.3);
+}
+
+
+input[type="file"].image-preview {
+    display: none;
+}
+
+#post-link {
+  /*color: blue;*/
+  text-decoration: none;
+}
+
+#post-link:hover {
+  /*color: initial;*/
+}
+#post-item {
+  background-color: white;
+  -webkit-box-shadow: none;
+  /*box-shadow: 0 3px 2px rgba(0,0,0,0.3);*/
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+  margin: 5px;
+  padding: 10px;
+}
+
+#post-item:hover {
+  -webkit-box-shadow: none;
+  /*box-shadow: 0 4px 3px rgba(0,0,0,0.3);*/
+  box-shadow: 0 8px 7px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+
+.navbar-collapse {
+  flex-grow: none;
+}
+
+.navbar {
+  justify-content: space-between;
 }

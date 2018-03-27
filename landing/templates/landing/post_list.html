@@ -1,0 +1,118 @@
+{% load humanize %}
+{% load humanize_distance %}
+
+<div class="row mt-5 mb-2">
+    <div class="col-md-3 mr-auto ml-auto">
+    {% if is_paginated %}
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="card-columns">
+
+        {% for post in all_user_posts %}
+        <div class="card m-2" id="post-item">
+            <div class="card-body">
+                <a id="post-link" href='{{ post.get_absolute_url }}'>
+
+                    <div class="list-lead-box">
+                    {% if post.get_learn %}
+                        <span class="card-text list-to-learn-lead">
+                            <small class="text-muted">wants to learn:</small>
+                        </span>
+                        {% for item in post.get_learn %}
+                            <strong>
+                            {{item|default_if_none:""}}
+                            </strong>
+                            {% if not forloop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    <em class="card-text text-muted list-muted-text">not looking for anything at the moment!</em>
+                    {% endif %}
+                    </div>
+
+                    <div class="list-lead-box">
+                    {% if post.get_teach %}
+                        <span class="card-text list-to-teach-lead">
+                            <small class="text-muted">able to teach:</small>
+                        </span>
+
+                        {% for item in post.get_teach %}
+                        <strong>
+                            {{item|default_if_none:"nothing here.."}}
+                        </strong>
+                        {% if not forloop.last %}
+                            ,
+                        {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <em class="card-text text-muted list-muted-text">nothing to share at the moment!</em>
+                    {% endif %}
+                    </div>
+
+                    <div class="mt-2 list-more-info">
+                        <span class="card-text list-listing-by">by
+                            <a href='{{ post.get_absolute_url }}'>{{ post.user }}</a>
+                        </span>
+                        {% if request.user.is_authenticated %}
+                        {# instead, if location is approved.. #}
+                        - <span class="card-text">{{ post.distance_away|distance_format }} away</span>
+                        {% endif %}
+                        {# -<span class="list-listing-date"> {{ post.created|naturaltime }}</span> #}
+                        <!-- {{ post.created|date:'DATETIME_FORMAT' }} -->
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-3 mr-auto ml-auto">
+    {% if is_paginated %}
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+    </div>
+</div>

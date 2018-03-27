@@ -1,4 +1,4 @@
-from django.urls import reverse, resolve
+from django.core.urlresolvers import reverse, resolve
 
 from test_plus.test import TestCase
 
@@ -29,15 +29,15 @@ class TestUserURLs(TestCase):
         )
 
     def test_detail_reverse(self):
-        """users:detail should reverse to /users/testuser/."""
+        """users:detail should reverse to /users/testusers/."""
         self.assertEqual(
             reverse('users:detail', kwargs={'username': 'testuser'}),
-            '/users/testuser/'
+            '/users/testusers/'
         )
 
     def test_detail_resolve(self):
-        """/users/testuser/ should resolve to users:detail."""
-        self.assertEqual(resolve('/users/testuser/').view_name, 'users:detail')
+        """/users/testusers/ should resolve to users:detail."""
+        self.assertEqual(resolve('/users/testusers/').view_name, 'users:detail')
 
     def test_update_reverse(self):
         """users:update should reverse to /users/~update/."""

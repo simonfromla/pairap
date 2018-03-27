@@ -1,0 +1,65 @@
+{% load i18n %}
+{% load notifications_tags %}
+
+<div class="">
+  <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand ml-3" href="{% url 'landing:home' %}">Parup</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-5 align-items-center">
+
+        {% if request.user.is_authenticated %}
+          {% if request.user.is_profile_to.profile_photo_thumbnail %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile:detail' username=request.user.username %}">
+            <img class="profile_photo_thumbnail" src="{{ request.user.is_profile_to.profile_photo_thumbnail.url }}" />
+            {{ request.user }}
+          </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile:detail' username=request.user.username %}">
+            <i class="far fa-user"></i>
+          </a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:list' %}">
+            <i class="far fa-envelope"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown" data-open-notifications="{% url 'notifications:notifications_ajax' %}">
+            <a href="#" class="dropdown-toggle nav-link" id="dropdownMenuLink" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               <i class="far fa-inbox"></i>
+               {# {% live_notify_badge badge_class="badge badge-warning" %} #}
+                <span class="caret"></span>
+              {% live_notify_list list_class="dropdown-menu dropdown-menu-right dropdown-menu-scroll live_notify_list" %}
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:update' %}">
+            <i class="far fa-cog"></i>
+          {# {% trans "Preferences" %} #}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">{% trans "logout" %}</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+          </li>
+          <li class="nav-item">
+            <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+</div>

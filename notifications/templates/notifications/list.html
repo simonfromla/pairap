@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<ul class="notification-all">
+  {% for notice in notifications %}
+    {% include 'notifications/notice.html' %}
+  {% endfor %}
+</ul>
+{% endblock content %}

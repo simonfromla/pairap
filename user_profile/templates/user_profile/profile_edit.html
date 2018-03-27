@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mr-auto ml-auto">
+        <h1>Update your profile</h1>
+        {% if form.errors.non_field_errors %}
+            {{form.errors}}
+        {% endif %}
+        <form enctype="multipart/form-data" method="POST" action="{% url 'profile:edit_profile' username=request.user %}"> {% csrf_token %}
+            {# {{ form|crispy }} #}
+            {% include 'includes/bs4_profile_update_form.html' with form=form %}
+<hr>
+            {{ credential_image.management_form }}
+            {% for form in credential_image %}
+                {% include 'includes/bs4_credential_image_form.html' with form=form %}
+                {# {{ form }} #}
+            {% endfor %}
+
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+$(document).ready(function(){
+    var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg',
+        url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
+    // initialize with defaults
+    $("input[type='file']").fileinput({
+        initialPreview: [url1, url2],
+        initialPreviewAsData: true,
+        initialPreviewConfig: [
+            {caption: "Moon.jpg", downloadUrl: url1, size: 930321, width: "120px", key: 1},
+            {caption: "Earth.jpg", downloadUrl: url2, size: 1218822, width: "120px", key: 2}
+        ],
+        deleteUrl: "/site/file-delete",
+        overwriteInitial: false,
+        maxFileSize: 100,
+        initialCaption: "The Moon and the Earth"
+    });
+
+
+    // with plugin options
+    $("input[type='file']").fileinput({'showUpload':false, 'previewFileType':'any'});
+})
+</script>
+{% endblock javascript %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row col-sm-6 col-sm-offset-3">
+<h1>{{ respond_to_user }} would like to pair with you!</h1>
+
+
+<form enctype="multipart/form-data" method="POST" action="{% url 'profile:pair_response' username=view.kwargs.username %}">
+    {% csrf_token %}
+    {{form|crispy}}
+    {# TODO: If none to teach, ... #}
+    {{ respond_to_user }} would like to learn {{requester_learns}} from you. <br />
+    {{ respond_to_user }} can teach {{requester_teaches}} <br />
+    <input class='btn btn-primary' type="submit" name='accept' value="Accept" />
+    <input class='btn btn-warning' type="submit" name='deny' value="Deny" />
+
+</form>
+
+</div>
+{% endblock content %}

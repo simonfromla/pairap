@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h3>Learn something new</h3>
+        <p>
+            {# TODO clean up/ If not registered, CTA #}
+        {% comment %}
+        {{request.user}}
+        {{user}}
+        {{sql_queries}}
+        {{messages}}
+        {{DEFAULT_MESSAGE_LEVELS}}
+        {% endcomment %}
+        </p>
+        {% comment %}
+            accounts is not a registered namespace
+        {% if not request.user.is_authenticated %}
+            <a href="{% url 'accounts:register' %}"><input class="btn btn-default" type="submit" value="Get Started &raquo;"><input type="hidden" name=""></a>
+        {% endif %}
+        {% endcomment %}
+    </div>
+</div>
+
+<!-- Search -->
+<!-- TEMPORARY -->
+<div class="row">
+    <div class="col-md-10 mr-5 ml-5">
+        <form class='form' method="GET" action=".">
+            <div class="input-group">
+                <input class="form-control form-control-lg" id="search-input" type="text" name="q" placeholder="" value="{{request.GET.q}}" />
+                <span class="input-group-btn">
+                <button class="btn btn-lg btn-secondary" id="search-button" type="submit" /><i class="fas fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+{% comment %}
+{# <div class="row">
+    <div class="col-md-12">
+    <div class="sort_search">
+        <h5>Sort by:</h5>
+        <ul>
+            <li>-Teach</li>
+            <li>+Learn</li>
+            <li>Tech</li>
+            <li>Language</li>
+            <li>...</li>
+        </ul>
+    </div>
+    </div>
+</div>
+ #}
+{% endcomment %}
+
+<form id="location" role="form" data-submit-location-ajax="{% url 'landing:home_location' %}" method="post">{% csrf_token %}
+        <div class="form-group">
+            <input id="id_latitude" name="latitude" type="hidden" class="form-control"></input>
+        </div>
+        <div class="form-group">
+            <input id="id_longitude" name="longitude" type="hidden" class="form-control"></input>
+        </div>
+</form>
+
+
+<!-- Postings/results ListView -->
+{% include 'landing/post_list.html' %}
+
+{% endblock content %}
+
+
+{% block javascript %}
+    <script src="{% static 'js/typed/typed.min.js' %}"></script>
+    <script language="javascript" type="text/javascript">
+        // typed effect
+        var strings = ['BUS120', 'BUS140 @ SNU', 'speaking French', '5-string bass', 'graphic design', 'swimming - backstroke', 'water-coloring', '' ]
+        function shuffleStrings(array) {
+            let counter = array.length;
+            // While there are elements in the array
+            while (counter > 0) {
+                // Pick a random index
+                let index = Math.floor(Math.random() * counter);
+                // Decrease counter by 1
+                counter--;
+                // And swap the last element with it
+                let temp = array[counter];
+                array[counter] = array[index];
+                array[index] = temp;
+            }
+            return array;
+        }
+        shuffled = shuffleStrings(strings)
+        var typed = new Typed("#search-input", {
+            strings: shuffled,
+            attr: 'placeholder',
+            typeSpeed: 30,
+            backSpeed: 20,
+            loop: true,
+            cursorChar: '|',
+            showCursor: true,
+            // fadeOut: true,
+            // fadeOutClass: 'typed-fade-out',
+            // autoInsertCss: true,
+        });
+        document.querySelector('#search-input').
+            addEventListener('click', function() {
+                typed.reset(restart=false);
+            });
+
+
+        // location grab
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = document.getElementById('id_latitude');
+            var lon = document.getElementById('id_longitude');
+            lat.value = position.coords.latitude;
+            lon.value = position.coords.longitude;
+
+            $.ajax({
+                headers: { "X-CSRFToken": '{{csrf_token}}' },
+                method: 'get',
+                dataType: 'json',
+                cache: false,
+                url: $('#location').attr('data-submit-location-ajax'),
+                data: {'lat': lat.value, 'lon': lon.value}
+            }).done(function(data) {
+                 // data is filled with Django result, here {'key': value}
+                /* TODO: remember the call has been made and it's registered on Django side */
+            }).fail(function(data) {
+                alert('fatal error!');
+            }).always(function() {
+                /* whatever the result, always do something here */
+            });
+        });
+    </script>
+
+{% endblock javascript %}

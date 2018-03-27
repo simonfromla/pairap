@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row col-sm-6 col-sm-offset-3">
+<h1>Make a new Pair Request to {{ request_to_user }}</h1>
+
+<form enctype="multipart/form-data" method="POST" action="{% url 'profile:pair_request' username=view.kwargs.username %}">
+    {% csrf_token %}
+    {% include 'includes/bs4_pair_request_form.html' with form=form %}
+
+    {# {{form|crispy}} #}
+    <input class='btn btn-primary' type="submit" name='request' value="Send a request!" />
+
+</form>
+
+</div>
+{% endblock content %}

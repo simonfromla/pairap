@@ -9,5 +9,11 @@
 
     <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
+<!-- {# TODO - allow resending of verif email in this page. Hook custom view. May need auth redo-sign in with limited functionality? #}
+{#     <form action="{% url 'account_email' %}" class="email_list" method="post">
+        {% csrf_token %}
+        <button class="secondaryAction btn btn-primary" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+    </form> #} -->
+
 {% endblock %}
 
