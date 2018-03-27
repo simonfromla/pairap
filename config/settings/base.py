@@ -42,7 +42,6 @@ DATABASES = {
     'default': env.db('DATABASE_URL'),
 }
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-DATABASES['default']['NAME'] = 'loregis'
 # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 DATABASES['default']['ATOMIC_REQUESTS'] = True
