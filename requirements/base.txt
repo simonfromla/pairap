@@ -20,6 +20,9 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 
 # Your custom requirements go here
 channels==2.0.2
+channels_redis
+# another Django install after channels_redis since it installs Django2
+django==1.11.8
 django-imagekit==4.0.2
 django-widget-tweaks==1.4.1
 jsonfield==2.0.2
