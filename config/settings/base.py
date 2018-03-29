@@ -4,7 +4,7 @@ Base settings to build other settings files upon.
 
 import environ
 import os
-
+print("Loading base.py")
 ROOT_DIR = environ.Path(__file__) - 3  # (pairup/config/settings/base.py - 3 = pairup/)
 APPS_DIR = ROOT_DIR.path('pairup')
 
@@ -41,6 +41,7 @@ USE_TZ = True
 DATABASES = {
     'default': env.db('DATABASE_URL'),
 }
+
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
@@ -244,7 +245,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = 'pairup.users.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html

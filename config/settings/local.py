@@ -1,8 +1,12 @@
 from .base import *  # noqa
 from .base import env
-
+print("Loading local.py")
 # GENERAL
 # ------------------------------------------------------------------------------
+# Custom. Allow Staticfiles to serve: https://github.com/django/channels/issues/87#issuecomment-304733698
+MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']  # noqa F405
+
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key

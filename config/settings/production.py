@@ -2,7 +2,7 @@ import logging
 
 from .base import *  # noqa
 from .base import env
-
+print("Loading production.py")
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -83,7 +83,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # STATIC
 # ------------------------
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Comment out Fix for Daphne to run
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # MEDIA
 # ------------------------------------------------------------------------------
@@ -123,13 +124,13 @@ ADMIN_URL = env('DJANGO_ADMIN_URL')
 # Anymail (Mailgun)
 # ------------------------------------------------------------------------------
 # https://anymail.readthedocs.io/en/stable/installation/#installing-anymail
-INSTALLED_APPS += ['anymail']  # noqa F405
-EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
-# https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
-ANYMAIL = {
-    'MAILGUN_API_KEY': env('MAILGUN_API_KEY'),
-    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_DOMAIN')
-}
+# INSTALLED_APPS += ['anymail']  # noqa F405
+# EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+# # https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
+# ANYMAIL = {
+#     'MAILGUN_API_KEY': env('MAILGUN_API_KEY'),
+#     'MAILGUN_SENDER_DOMAIN': env('MAILGUN_DOMAIN')
+# }
 
 # Gunicorn
 # ------------------------------------------------------------------------------
@@ -206,3 +207,12 @@ RAVEN_CONFIG = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+import dj_database_url
+
+DATABASES['default'] =  dj_database_url.config(default='postgis://USER:PASSWORD@HOST:PORT/NAME')
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
+GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
+GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
+
+print("WO")
