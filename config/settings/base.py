@@ -252,6 +252,8 @@ ACCOUNT_ADAPTER = 'pairup.users.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = 'pairup.users.adapters.SocialAccountAdapter'
 
+ACCOUNT_SIGNUP_FORM_CLASS = "pairup.users.forms.SignupForm"
+
 
 # Your stuff...
 # ------------------------------------------------------------------------------

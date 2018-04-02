@@ -85,10 +85,15 @@ class SignupForm(forms.Form):
     class Meta:
         model = Profile
 
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.pop("autofocus", None)
+        self.fields['email'].widget.attrs.update({"autofocus": "autofocus"})
+
     def clean(self):
         cleaned_data = super().clean()
         if not self.cleaned_data['learn1'] or self.cleaned_data['teach1']:
-            raise forms.ValidationError("Specify at least one skill you can teach or would like to learn")
+            raise forms.ValidationError("Specify at least one skill to offer or something you'd like to learn")
         else:
             return cleaned_data
 
