@@ -23,12 +23,7 @@
 
 {% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge' fetch=10 refresh_period=5 %}
 
-<!-- place project specific Javascript in this file -->
-<script src="{% static 'js/project.js' %}"></script>
-{# chat socket related #}
-<script src="{% static 'js/main.js' %}"></script>
-
-
+{# Make sure CSRF comes before files dependent on AJAX calls #}
 {# CSRF #}
 <script type="text/javascript">
     function getCookie(name) {
@@ -61,3 +56,7 @@
         }
     });
 </script>
+<!-- place project specific Javascript in this file -->
+<script src="{% static 'js/project.js' %}"></script>
+{# chat socket related #}
+<script src="{% static 'js/main.js' %}"></script>

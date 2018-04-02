@@ -50,7 +50,7 @@ function fill_notification_list(data) {
                 message = '<a class="dropdown-item notification_single" data-href="/inbox/notifications/mark-as-read/' + (item.id + 110909) + '/" href="/message/"><span class="notification_type_badge">Message</span><span class="notification_timestamp_badge">' + notification_timestamp + '</span><div class="notification_description_badge">' + message + '!</div></a>';
             }
             if(item.verb === 'sent you a pairing request'){
-                message = '<a class="dropdown-item notification_single" data-href="/inbox/notifications/mark-as-read/' + (item.id + 110909) + '/" href="/profile/' + item.actor + '"><span class="notification_type_badge">Request</span><span class="notification_timestamp_badge">' + notification_timestamp + '</span><div class="notification_description_badge">' + message + '!</div></a>';
+                message = '<a class="dropdown-item notification_single" data-href="/inbox/notifications/mark-as-read/' + (item.id + 110909) + '/" href="/profile/' + item.actor + '"><div class="notification_meta"><span class="notification_type_badge">Request</span><span class="notification_timestamp_badge">' + notification_timestamp + '</span></div><div class="notification_description_badge">' + message + '!</div></a>';
             }
             if(item.verb === 'accepted your request'){
                 message = '<a class="dropdown-item notification_single" data-href="/inbox/notifications/mark-as-read/' + (item.id + 110909) + '/" href="/message/"><span class="notification_type_badge">New Pairing Partner!</span><span class="notification_timestamp_badge">' + notification_timestamp + '</span><div class="notification_description_badge">' + message + '! Begin chatting!</div></a>';
@@ -58,7 +58,7 @@ function fill_notification_list(data) {
             if(!item.unread){
                 return '<li class="notification_list_item read_message">' + message + '</li>';
             } else {
-                return '<li class="notification_list_item">' + message +item.id+ '</li>';
+                return '<li class="notification_list_item">' + message + '</li>';
             }
         }).join('')
 

@@ -48,7 +48,7 @@ class HomeLocationAjaxView(View):
 class HomeListView(ListView):
     model = Profile
     context_object_name = 'all_user_posts'
-    paginate_by = 2
+    paginate_by = 6
 
     queryset = Profile.objects.filter(public=True).order_by('-created')
     # TODO CLEAN UP and combine views -- see: PSEUDO on trello

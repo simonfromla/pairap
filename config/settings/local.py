@@ -70,3 +70,17 @@ INSTALLED_APPS += ['django_extensions']  # noqa F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+# CHANNELS CONFIGURATION****MOVED TO PROD/LOCAL
+# ------------------------------------------------------------------------------
+# REDIS BACKEND
+redis_host = os.environ.get('REDIS_HOST', 'localhost')
+# Channel layer definitions
+# http://channels.readthedocs.org/en/latest/deploying.html#setting-up-a-channel-backend
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(redis_host, 6379)],
+        },
+    },
+}

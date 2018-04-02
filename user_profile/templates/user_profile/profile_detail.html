@@ -47,6 +47,10 @@
         {% if request.user == object.user %}
         <strong>Public</strong>
         <form class="ajax-public-toggle-form" method="POST" action='{% url "profile:detail" username=object.user %}' data-url='{% url "profile:public_toggle" %}'>
+            {# <label class="switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label> #}
             {% include 'includes/bs4_public_toggle_form.html' with form=public_toggle_form %}
         </form>
         <div id="public_toggle_form_errors" class="form-error" style="display: none;"></div>
@@ -197,7 +201,7 @@
 
 <div class="row">
 
-    <div class="col-md-2 mr-auto ml-auto">
+    <div class="col-xs-2 mr-auto ml-auto">
     {% if is_pair %}
         {% if visitor_has_request_pending %}
             <button class="btn btn-primary btn-no-hover">

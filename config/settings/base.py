@@ -12,6 +12,7 @@ env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
 if READ_DOT_ENV_FILE:
+    print("Reading from .env...")
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR.path('.env')))
 
@@ -262,19 +263,31 @@ SOCIALACCOUNT_AUTO_SIGNUP = False
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 
-# CHANNELS CONFIGURATION
+# CHANNELS CONFIGURATION****MOVED TO PROD/LOCAL
 # ------------------------------------------------------------------------------
 # REDIS BACKEND
-redis_host = os.environ.get('REDIS_HOST', 'localhost')
+# redis_host = os.environ.get('REDIS_HOST', 'localhost')
 # Channel layer definitions
 # http://channels.readthedocs.org/en/latest/deploying.html#setting-up-a-channel-backend
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [(redis_host, 6379)],
-        },
-    },
-}
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": ["redis://h:pf954c886918ca88905dcf8fef4546bd9dbc2738d5895b12bc36ed2d058c387ec@ec2-34-201-226-230.compute-1.amazonaws.com:7719"],
+#         },
+#     },
+# }
+
+
+# redis_host = os.environ.get('REDIS_HOST', 'localhost')
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [(redis_host, 6379)],
+#         },
+#     },
+# }
 
 ASGI_APPLICATION = 'config.routing.application'

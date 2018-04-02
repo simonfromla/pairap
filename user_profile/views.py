@@ -80,7 +80,7 @@ class CheckPublicAjaxView(View):
                     return JsonResponse(data, status=400)
             else:
                 data = {
-                    'message': "LOG IN"
+                    'message': "Log in to get started!"
                 }
                 return JsonResponse(data, status=400)
 
